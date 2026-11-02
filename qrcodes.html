@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Treasure QR Codes</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 24px; color: #1f1450; background: #fff; }
+    h1 { margin: 0 0 4px; }
+    p { color: #666; margin: 0 0 20px; }
+    button { padding: 10px 20px; border-radius: 999px; border: none; background: #d4941e; color: #fff; font-weight: 700; cursor: pointer; margin-bottom: 20px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+    .card { border: 2px dashed #d4941e; border-radius: 14px; padding: 16px; text-align: center; break-inside: avoid; }
+    .card .qr { display: flex; justify-content: center; margin: 10px 0; }
+    .card h3 { margin: 6px 0 0; }
+    .card small { color: #888; }
+    @media print { button, p { display: none; } body { margin: 0; } }
+  </style>
+</head>
+<body>
+  <h1>🪔 Treasure QR Codes</h1>
+  <p>Print this page, cut out the cards and hide them. Keep this page secret from players!</p>
+  <button onclick="print()">Print</button>
+  <div class="grid" id="grid"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="items.js"></script>
+  <script>
+    const grid = document.getElementById("grid");
+    ITEMS.forEach(item => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `<div style="font-size:2rem">${item.emoji}</div><h3>${item.name}</h3><div class="qr"></div><small>${item.points} points</small>`;
+      grid.appendChild(card);
+      new QRCode(card.querySelector(".qr"), { text: item.code, width: 170, height: 170, correctLevel: QRCode.CorrectLevel.M });
+    });
+  </script>
+</body>
+</html>

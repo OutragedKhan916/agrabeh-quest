@@ -1,0 +1,19 @@
+// ============================================
+//  GAME CONFIG — edit these to change the game
+// ============================================
+
+// Points needed to win
+const WIN_POINTS = 150;
+
+// Each item has a unique secret code. The QR code contains this exact text.
+// Change the codes to anything you like (keep them unique).
+const ITEMS = [
+  { code: "AGRABAH-LAMP-7731",    name: "Magic Lamp",      emoji: "🪔", points: 50, desc: "Rub it… if you dare." },
+  { code: "AGRABAH-CARPET-2290",  name: "Flying Carpet",   emoji: "🧞", points: 40, desc: "Woven with sky-silk." },
+  { code: "AGRABAH-RING-5512",    name: "Genie's Ring",    emoji: "💍", points: 30, desc: "Hums with old magic." },
+  { code: "AGRABAH-SCARAB-8841",  name: "Golden Scarab",   emoji: "🪲", points: 25, desc: "Opens the Cave of Wonders." },
+  { code: "AGRABAH-RUBY-3307",    name: "Desert Ruby",     emoji: "💎", points: 20, desc: "Red as a desert sunset." },
+  { code: "AGRABAH-SCIMITAR-6620",name: "Sultan's Sword",  emoji: "🗡️", points: 20, desc: "Forged in the palace." },
+  { code: "AGRABAH-KEY-1478",     name: "Palace Key",      emoji: "🗝️", points: 15, desc: "Unlocks the royal vault." },
+  { code: "AGRABAH-APPLE-9054",   name: "Market Apple",    emoji: "🍎", points: 10, desc: "Snatched from the bazaar." },
+];

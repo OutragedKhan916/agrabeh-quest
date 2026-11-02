@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Treasures of Agrabah</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="stars"></div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <h2 class="meter-title">Genie Power</h2>
+      <div class="meter">
+        <div class="meter-fill" id="meterFill"></div>
+        <div class="meter-glow"></div>
+      </div>
+      <div class="score"><span id="score">0</span><small> / <span id="goal">0</span></small></div>
+      <p class="found"><span id="foundCount">0</span> of <span id="totalCount">0</span> treasures</p>
+      <button class="btn ghost" id="resetBtn">Reset game</button>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+      <header>
+        <h1>Treasures of Agrabah</h1>
+        <p class="subtitle">Find the hidden QR codes. Scan each treasure to fill the Genie's power and win!</p>
+      </header>
+
+      <section class="scanner-card">
+        <div id="reader"></div>
+        <div class="scanner-placeholder" id="placeholder">
+          <div class="lamp">🪔</div>
+          <p>Tap below to open your camera</p>
+        </div>
+        <button class="btn" id="scanBtn">Start Scanning</button>
+      </section>
+
+      <section>
+        <h3 class="section-title">Your Treasure Hoard</h3>
+        <div class="items" id="items"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Win popup -->
+  <div class="modal" id="winModal">
+    <div class="modal-box">
+      <div class="big-emoji">🧞‍♂️</div>
+      <h2>Your Wish Is Granted!</h2>
+      <p>You gathered enough treasure to awaken the Genie. You win!</p>
+      <p class="final"><span id="finalScore">0</span> points</p>
+      <button class="btn" id="closeWin">Keep exploring</button>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+  <script src="items.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
