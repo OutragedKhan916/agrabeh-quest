@@ -103,9 +103,89 @@ h1 {
   display: flex; flex-direction: column; gap: 14px; align-items: center;
   margin-bottom: 28px;
 }
-#reader { width: 100%; max-width: 420px; border-radius: 14px; overflow: hidden; }
-#reader:empty { display: none; }
-.scanner-placeholder { text-align: center; color: var(--muted); padding: 20px 0; }
+/* ---------- Camera viewfinder ---------- */
+.camera {
+  position: relative;
+  width: 100%; max-width: 420px;
+  aspect-ratio: 1 / 1;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #08041a;
+  border: 2px solid var(--border);
+}
+#reader { position: absolute; inset: 0; border: none !important; }
+#reader video {
+  width: 100% !important; height: 100% !important;
+  object-fit: cover; display: block;
+}
+
+.scanner-placeholder {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; color: var(--muted);
+}
+.camera.scanning .scanner-placeholder { display: none; }
+
+.scan-overlay {
+  position: absolute; inset: 0; pointer-events: none;
+  display: none; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+  background: radial-gradient(circle at center, transparent 38%, rgba(8,4,26,.55) 72%);
+}
+.camera.scanning .scan-overlay { display: flex; }
+
+.frame {
+  position: relative;
+  width: 66%; aspect-ratio: 1 / 1;
+  display: flex; align-items: center; justify-content: center;
+}
+.corner {
+  position: absolute; width: 22%; height: 22%;
+  border: 0 solid var(--gold);
+  filter: drop-shadow(0 0 6px rgba(245,197,66,.7));
+  transition: border-color .2s;
+}
+.corner.tl { top: 0; left: 0;  border-top-width: 5px; border-left-width: 5px;  border-top-left-radius: 14px; }
+.corner.tr { top: 0; right: 0; border-top-width: 5px; border-right-width: 5px; border-top-right-radius: 14px; }
+.corner.bl { bottom: 0; left: 0;  border-bottom-width: 5px; border-left-width: 5px;  border-bottom-left-radius: 14px; }
+.corner.br { bottom: 0; right: 0; border-bottom-width: 5px; border-right-width: 5px; border-bottom-right-radius: 14px; }
+
+.qr-logo {
+  width: 34%; height: 34%;
+  fill: var(--gold);
+  opacity: .55;
+  filter: drop-shadow(0 0 8px rgba(245,197,66,.6));
+  animation: qrPulse 2s ease-in-out infinite;
+}
+@keyframes qrPulse { 50% { opacity: .9; transform: scale(1.06); } }
+
+.laser {
+  position: absolute; left: 6%; right: 6%; top: 8%;
+  height: 3px; border-radius: 3px;
+  background: linear-gradient(90deg, transparent, var(--teal), var(--gold), var(--teal), transparent);
+  box-shadow: 0 0 12px var(--teal);
+  animation: laser 2.2s ease-in-out infinite alternate;
+}
+@keyframes laser { to { top: 90%; } }
+
+.hint {
+  margin: 0; padding: 6px 14px; border-radius: 999px;
+  background: rgba(8,4,26,.7); color: var(--text); font-size: .85rem;
+}
+
+/* flash when a code is read */
+.camera.hit .corner { border-color: var(--teal); }
+.camera.hit .qr-logo { fill: var(--teal); opacity: 1; animation: none; transform: scale(1.15); transition: transform .2s; }
+.camera.hit::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: rgba(42,209,201,.25); animation: flash .5s ease-out forwards;
+}
+.camera.miss .corner { border-color: #ff8a7a; }
+@keyframes flash { to { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .laser, .qr-logo, .lamp { animation: none; }
+}
+
 .lamp { font-size: 4rem; animation: float 3s ease-in-out infinite; }
 @keyframes float { 50% { transform: translateY(-10px) rotate(-4deg); } }
 

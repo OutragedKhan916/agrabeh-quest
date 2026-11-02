@@ -32,10 +32,33 @@
       </header>
 
       <section class="scanner-card">
-        <div id="reader"></div>
-        <div class="scanner-placeholder" id="placeholder">
-          <div class="lamp">🪔</div>
-          <p>Tap below to open your camera</p>
+        <div class="camera" id="camera">
+          <div id="reader"></div>
+
+          <div class="scan-overlay" aria-hidden="true">
+            <div class="frame">
+              <span class="corner tl"></span><span class="corner tr"></span>
+              <span class="corner bl"></span><span class="corner br"></span>
+              <svg class="qr-logo" viewBox="0 0 29 29" shape-rendering="crispEdges">
+                <!-- finder squares -->
+                <path d="M0 0h7v7H0zM1 1v5h5V1zM2 2h3v3H2z M22 0h7v7h-7zM23 1v5h5V1zM24 2h3v3h-3z M0 22h7v7H0zM1 23v5h5v-5zM2 24h3v3H2z" fill-rule="evenodd"/>
+                <!-- data dots -->
+                <path d="M9 0h2v2H9zM13 1h2v1h-2zM17 0h1v3h-1zM9 4h1v3H9zM12 4h3v2h-3zM16 5h2v2h-2zM19 3h1v2h-1z
+                         M0 9h2v1H0zM3 9h3v2H3zM8 9h3v3H8zM13 8h2v4h-2zM17 9h3v1h-3zM22 9h2v3h-2zM26 8h3v2h-3z
+                         M1 13h1v3H1zM4 13h3v2H4zM10 13h2v2h-2zM15 13h1v1h-1zM18 12h2v3h-2zM23 13h1v2h-1zM26 12h2v2h-2z
+                         M0 18h3v2H0zM5 17h2v3H5zM9 17h1v3H9zM12 16h4v2h-4zM17 17h3v1h-3zM21 16h2v2h-2zM25 17h4v1h-4z
+                         M9 22h3v1H9zM14 21h2v3h-2zM18 20h2v2h-2zM22 21h1v2h-1zM25 20h2v3h-2z
+                         M9 25h1v4H9zM12 26h3v2h-3zM17 24h2v1h-2zM17 27h4v2h-4zM22 25h3v1h-3zM27 25h2v4h-2zM23 27h2v2h-2z"/>
+              </svg>
+              <div class="laser"></div>
+            </div>
+            <p class="hint">Point at a treasure QR code</p>
+          </div>
+
+          <div class="scanner-placeholder" id="placeholder">
+            <div class="lamp">🪔</div>
+            <p>Tap below to open your camera</p>
+          </div>
         </div>
         <button class="btn" id="scanBtn">Start Scanning</button>
       </section>

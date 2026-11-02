@@ -80,8 +80,9 @@ function startGame(config) {
     lastText = text; lastTime = now;
 
     const item = ITEMS.find(i => i.code === text);
-    if (!item) return toast("That's not a treasure of Agrabah… 🐍", true);
-    if (state.found.includes(item.code)) return toast(`You already found the ${item.name}!`, true);
+    if (!item) { flash("miss"); return toast("That's not a treasure of Agrabah… 🐍", true); }
+    if (state.found.includes(item.code)) { flash("miss"); return toast(`You already found the ${item.name}!`, true); }
+    flash("hit");
 
     state.found.push(item.code);
     save();
@@ -117,21 +118,29 @@ function startGame(config) {
   // ----- camera -----
   let scanner = null, running = false;
   const btn = $("scanBtn");
+  const camera = $("camera");
+  let flashTimer;
+  function flash(kind) {
+    camera.classList.remove("hit", "miss"); void camera.offsetWidth;
+    camera.classList.add(kind);
+    clearTimeout(flashTimer);
+    flashTimer = setTimeout(() => camera.classList.remove(kind), 700);
+  }
   btn.onclick = async () => {
     if (running) return stop();
-    $("placeholder").style.display = "none";
     try {
       scanner = scanner || new Html5Qrcode("reader");
       await scanner.start(
         { facingMode: "environment" },
-        { fps: 10, qrbox: (w, h) => { const s = Math.floor(Math.min(w, h) * 0.7); return { width: s, height: s }; } },
+        { fps: 12, aspectRatio: 1.0 },
         handleScan,
         () => {}
       );
       running = true;
+      camera.classList.add("scanning");
       btn.textContent = "Stop Scanning";
     } catch (err) {
-      $("placeholder").style.display = "";
+      camera.classList.remove("scanning");
       toast("Couldn't open the camera. Allow camera access and use HTTPS.", true);
       console.error(err);
     }
@@ -140,7 +149,7 @@ function startGame(config) {
     try { await scanner.stop(); scanner.clear(); } catch (e) {}
     running = false;
     btn.textContent = "Start Scanning";
-    $("placeholder").style.display = "";
+    camera.classList.remove("scanning");
   }
 
   // ----- reset -----
