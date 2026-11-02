@@ -1,0 +1,17 @@
+{
+  "name": "agrabah-quest",
+  "version": "1.0.0",
+  "description": "Aladdin-themed QR code scavenger hunt, published to GitHub Pages",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "build": "node scripts/build.js",
+    "dev": "npm run build && npm start"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
