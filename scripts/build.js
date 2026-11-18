@@ -27,9 +27,11 @@ if (typeof winPoints !== "number" || winPoints <= 0) fail("\"winPoints\" must be
 
 const seen = new Set();
 items.forEach((item, i) => {
-  for (const key of ["code", "name", "emoji", "points"]) {
+  for (const key of ["code", "name", "points"]) {
     if (item[key] === undefined || item[key] === "") fail(`Item #${i + 1} is missing "${key}".`);
   }
+  if (!item.emoji && !item.icon) fail(`"${item.name}" needs an "emoji" or an "icon".`);
+  if (item.icon && !fs.existsSync(path.join(PUBLIC, item.icon))) fail(`"${item.name}" icon not found: public/${item.icon}`);
   if (typeof item.points !== "number") fail(`"${item.name}" points must be a number.`);
   if (seen.has(item.code)) fail(`Duplicate code "${item.code}". Every item needs its own code.`);
   seen.add(item.code);
@@ -49,7 +51,7 @@ if (winPoints > total) fail(`winPoints is ${winPoints} but all items together on
       margin: 2,
       color: { dark: "#1f1450", light: "#ffffff" },
     });
-    console.log(`  ${item.emoji}  ${item.name.padEnd(16)} ${String(item.points).padStart(3)} pts → qr/${file}`);
+    console.log(`  ${item.emoji || "🖼️"}  ${item.name.padEnd(16)} ${String(item.points).padStart(3)} pts → qr/${file}`);
   }
 
   console.log(`\n✅ ${items.length} treasures, ${total} total points, ${winPoints} needed to win.`);

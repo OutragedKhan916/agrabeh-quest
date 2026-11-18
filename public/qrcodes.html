@@ -29,7 +29,7 @@
     fetch("items.json", { cache: "no-store" }).then(r => r.json()).then(({ items }) => items.forEach(item => {
       const card = document.createElement("div");
       card.className = "card";
-      card.innerHTML = `<div style="font-size:2rem">${item.emoji}</div><h3>${item.name}</h3><div class="qr"></div><small>${item.points} points</small>`;
+      card.innerHTML = `<div style="font-size:2rem;height:2.6rem">${item.icon ? `<img src="${item.icon}" alt="" style="height:2.6rem">` : item.emoji}</div><h3>${item.name}</h3><div class="qr"></div><small>${item.points} points</small>`;
       grid.appendChild(card);
       new QRCode(card.querySelector(".qr"), { text: item.code, width: 170, height: 170, correctLevel: QRCode.CorrectLevel.M });
     }));

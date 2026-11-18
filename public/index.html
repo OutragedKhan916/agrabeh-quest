@@ -60,7 +60,18 @@
             <p>Tap below to open your camera</p>
           </div>
         </div>
-        <button class="btn" id="scanBtn">Start Scanning</button>
+        <div class="cam-help" id="camHelp" hidden>
+          <h4 id="camHelpTitle"></h4>
+          <div id="camHelpBody"></div>
+          <button class="btn small" id="retryBtn">Try again</button>
+        </div>
+
+        <div class="scan-actions">
+          <button class="btn" id="scanBtn">Start Scanning</button>
+          <button class="btn ghost" id="photoBtn">📷 Scan a photo</button>
+        </div>
+        <input type="file" id="photoInput" accept="image/*" capture="environment" hidden>
+        <div id="fileReader" hidden></div>
       </section>
 
       <section>

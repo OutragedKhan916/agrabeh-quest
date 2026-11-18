@@ -51,4 +51,4 @@ Change `public/items.json`:
 ## Notes
 - The camera needs HTTPS or localhost. Opening `index.html` by double-clicking won't work (the JSON can't load either), so use `npm start` or the Pages link.
 - Progress is saved on each player's phone. **Reset game** clears it.
-- Test without a camera: `http://localhost:3000/?code=AGRABAH-LAMP-7731`
+- Test without a camera: `http://localhost:3000/?code=AGRABAH-CAVE-4127`
