@@ -1,0 +1,14 @@
+{
+  "title": "Treasures of Agrabah",
+  "winPoints": 150,
+  "winMessage": "You gathered enough treasure to awaken the Genie. You win!",
+  "items": [
+    { "code": "AGRABAH-CAVE-4127",    "name": "Cave Entrance", "emoji": "⛰️", "points": 50, "desc": "The mouth of the Cave of Wonders." },
+    { "code": "AGRABAH-COINS-8391",   "name": "Gold Coins",    "emoji": "🪙", "points": 40, "desc": "A sultan's fortune, still warm from the sun." },
+    { "code": "AGRABAH-JEWELS-2758",  "name": "Jewels",        "emoji": "💎", "points": 30, "desc": "Rubies and sapphires from the cave floor." },
+    { "code": "AGRABAH-CARPET-6604",  "name": "Magic Carpet",  "emoji": "🧞", "points": 25, "desc": "Woven with sky-silk. It flies!" },
+    { "code": "AGRABAH-LANTERN-1935", "name": "Lantern",       "emoji": "🪔", "icon": "icons/lantern.svg", "points": 25, "desc": "Lights the way through dark tunnels." },
+    { "code": "AGRABAH-BASKET-5462",  "name": "Basket",        "emoji": "🧺", "points": 15, "desc": "Straight from the bazaar." },
+    { "code": "AGRABAH-CANDLE-7280",  "name": "Candle",        "emoji": "🕯️", "points": 15, "desc": "Its flame never flickers out." }
+  ]
+}

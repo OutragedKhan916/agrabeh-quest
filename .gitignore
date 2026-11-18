@@ -1,2 +1,3 @@
 node_modules/
-public/qr/
+qr/
+_site/

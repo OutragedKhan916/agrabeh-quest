@@ -1,11 +1,11 @@
 // `npm run build`
-// 1. Checks public/items.json for mistakes (duplicate codes, missing fields, unreachable win score)
-// 2. Generates a PNG QR code for every item into public/qr/
+// 1. Checks items.json for mistakes (duplicate codes, missing fields, unreachable win score)
+// 2. Generates a PNG QR code for every item into qr/
 const fs = require("fs");
 const path = require("path");
 const QRCode = require("qrcode");
 
-const PUBLIC = path.join(__dirname, "..", "public");
+const PUBLIC = path.join(__dirname, "..");
 const JSON_PATH = path.join(PUBLIC, "items.json");
 const QR_DIR = path.join(PUBLIC, "qr");
 
@@ -31,7 +31,7 @@ items.forEach((item, i) => {
     if (item[key] === undefined || item[key] === "") fail(`Item #${i + 1} is missing "${key}".`);
   }
   if (!item.emoji && !item.icon) fail(`"${item.name}" needs an "emoji" or an "icon".`);
-  if (item.icon && !fs.existsSync(path.join(PUBLIC, item.icon))) fail(`"${item.name}" icon not found: public/${item.icon}`);
+  if (item.icon && !fs.existsSync(path.join(PUBLIC, item.icon))) fail(`"${item.name}" icon not found: ${item.icon}`);
   if (typeof item.points !== "number") fail(`"${item.name}" points must be a number.`);
   if (seen.has(item.code)) fail(`Duplicate code "${item.code}". Every item needs its own code.`);
   seen.add(item.code);

@@ -1,8 +1,12 @@
+# Publishes the game to GitHub Pages on every push.
+# Requires: Settings → Pages → Source = "GitHub Actions".
+# (If Source is "Deploy from a branch" instead, the site still works:
+#  GitHub serves the files at the top of the repo directly.)
 name: Publish to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [main, master]
   workflow_dispatch:
 
 permissions:
@@ -28,19 +32,21 @@ jobs:
           node-version: 20
 
       - name: Install
-        run: npm install
+        run: npm install --no-audit --no-fund
 
-      - name: Build (check items.json + make QR codes)
+      - name: Check items.json + make QR code PNGs
         run: npm run build
 
-      - name: Add .nojekyll
-        run: touch public/.nojekyll
+      - name: Collect site files
+        run: |
+          mkdir -p _site
+          cp -r index.html game.js style.css items.json qrcodes.html icons qr .nojekyll _site/
 
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: public
+          path: _site
 
       - id: deployment
         uses: actions/deploy-pages@v4
